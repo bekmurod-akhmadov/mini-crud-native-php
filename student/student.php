@@ -1,16 +1,12 @@
 <?php
-
 use db\Student;
-
 session_start();
 if (empty($_SESSION['user_id'])){
     header('refresh:5;url=../login.php' , true , 303); echo "<h4 style='color: #fff; background-color: red;padding: 20px 40px;'>Bu yerga qatdan kep qoldiz brat? UYGA BOR!&#128514;&#128514;</h4>";die;
 }
-
 require_once '../connection.php';
 require_once '../function.php';
 require_once '../widgets/header.php';
-
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 } else {
@@ -27,30 +23,22 @@ if (!empty($_GET['column'])){
     $column_name = 'first_name';
 }
 if (!empty($_GET['last_name'])){
-
     $finder = $_GET['last_name'];
     $models =  findByName($finder);
-
 } if (!empty($_GET['first_name'])){
-
     $finder = $_GET['first_name'];
     $models = findByFirstName($finder);
 }else{
     $models = getSortList( "student" , $page,false , $sort , $column_name);
 }
-
 if (empty($_SESSION['user_id'])){
     header('location:../login.php');
 }
-
 ?>
-
 <div class="container-fluid" style="margin-top: 140px">
-
         <?php if (!empty($_SESSION['info'])): ?>
             <div class="alert alert-success close-alert-success"><?=$_SESSION['info']?></div>
         <?php endif; ?>
-
         <div class="button text-right mb-4 d-flex justify-content-end" >
             <a class="btn btn-success" href="create-student.php">Student qo'shish</a>
         </div>
@@ -80,13 +68,11 @@ if (empty($_SESSION['user_id'])){
                     <th></th>
                 </tr>
                 <tr>
-
                     <th>Ismi
                         <span>
                             <a href="student.php?page=<?=$page?>&column=last_name&sort=asc"><i class="fas fa-arrow-up"></i></a>
                             <a href="student.php?page=<?=$page?>&column=last_name&sort=desc"><i class="fas fa-arrow-down"></i></a>
                         </span>
-
                     </th>
                     <th>Familiyasi 
                         <span>
@@ -155,12 +141,10 @@ if (empty($_SESSION['user_id'])){
                         <?php } ?>
                     </ul>
                 </nav>
-
             </tbody>
                 <?php unset($_SESSION['info']) ?>
             <?php endif; ?>
         </table>
-
 </div>
 <script>
     var buttons = document.querySelectorAll('.del');
